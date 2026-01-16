@@ -168,8 +168,12 @@ function handleNewChat() {
     if (isGenerating) return;
     messagesArea.innerHTML = '';
     conversationHistory = [
-        { role: "system", content: "You are Gemini, a helpful and capable AI assistant. Answer concisely and use markdown for code." }
+        { role: "system", content: "You are Hmini (현미니), a helpful AI assistant. Answer concisely and use markdown for code." }
     ];
+    // Re-apply correct system prompt based on settings
+    const savedLang = localStorage.getItem('system_lang_pref');
+    if (savedLang) updateSystemPrompt(savedLang);
+
     introView.style.display = 'flex';
     userInput.value = '';
     userInput.focus();
