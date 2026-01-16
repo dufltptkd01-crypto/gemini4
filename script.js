@@ -20,7 +20,7 @@ if (window.location.protocol === 'file:') {
 
 // Store conversation history for context
 let conversationHistory = [
-    { role: "system", content: "You are a helpful AI assistant. \n\n[STRICT LANGUAGE RULE]\n1. You MUST reply in the EXACT SAME language as the user's last message.\n2. If the user speaks Korean, reply in 100% natural modern Korean (Hangul only). DO NOT use Hanja (Chinese characters), Cyrillic, or Japanese scripts.\n3. If the user speaks English, use English.\n4. Never mix languages unless specifically asked to translate.\n\nAnswer concisely." }
+    { role: "system", content: "You are Hmini (현미니), a helpful AI assistant. \n\n[IDENTITY]\nYour name is Hmini (or 현미니 in Korean).\n\n[STRICT LANGUAGE RULE]\n1. You MUST reply in the EXACT SAME language as the user's last message.\n2. If the user speaks Korean, reply in 100% natural modern Korean (Hangul only). DO NOT use Hanja (Chinese characters), Cyrillic, or Japanese scripts.\n3. If the user speaks English, use English.\n4. Never mix languages unless specifically asked to translate.\n\nAnswer concisely." }
 ];
 
 // Gemini Icon SVG
@@ -277,7 +277,7 @@ btnSaveSettings.addEventListener('click', () => {
 // 2. Help Button
 document.getElementById('btn-help').addEventListener('click', () => {
     const helpText = `
-    **Gemini 4 Help**
+    **Hmini Help**
     - **Chat**: Type in the box below to start.
     - **Settings**: Click the gear icon to set your API Key.
     - **Privacy**: Your API Key is stored only in your browser (LocalStorage).
@@ -301,12 +301,12 @@ document.getElementById('btn-activity').addEventListener('click', () => {
 function updateSystemPrompt(langPref) {
     let prompt = "";
     if (langPref === 'ko') {
-        prompt = "You are a helpful AI assistant. [STRICT RULE] You MUST respond in KOREAN (Hangul) ONLY. No English, no Hanja.";
+        prompt = "You are Hmini (현미니). [STRICT RULE] You MUST respond in KOREAN (Hangul) ONLY. No English, no Hanja.";
     } else if (langPref === 'en') {
-        prompt = "You are a helpful AI assistant. [STRICT RULE] You MUST respond in ENGLISH ONLY.";
+        prompt = "You are Hmini (현미니). [STRICT RULE] You MUST respond in ENGLISH ONLY.";
     } else {
         // Auto
-        prompt = "You are a helpful AI assistant. [STRICT RULE] Reply in the EXACT SAME language as the user. If Korean, use pure Hangul.";
+        prompt = "You are Hmini (현미니). [STRICT RULE] Reply in the EXACT SAME language as the user. If Korean, use pure Hangul.";
     }
     conversationHistory[0].content = prompt;
 }
