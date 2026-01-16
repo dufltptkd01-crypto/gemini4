@@ -600,3 +600,61 @@ body {
     filter: brightness(1.1);
 }
 
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .app-container {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1000;
+    width: 280px;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.5);
+  }
+
+  .main-content {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .top-bar {
+    padding: 1rem;
+    padding-left: 3.5rem; /* Space for the toggle button */
+  }
+
+  .greeting .gradient-text {
+    font-size: 2.5rem; /* Smaller text */
+  }
+  
+  .greeting p {
+    font-size: 2.5rem;
+  }
+
+  .suggestion-cards {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    min-width: 160px;
+    height: 160px;
+  }
+  
+  .input-container {
+    width: 100%;
+    padding: 0 1rem 1rem 1rem;
+  }
+
+  .modal {
+    width: 95%;
+    margin: 10px;
+  }
+}
+

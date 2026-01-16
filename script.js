@@ -195,7 +195,19 @@ suggestionCards.forEach(card => {
 const sidebar = document.querySelector('.sidebar');
 const mainToggleBtn = document.getElementById('main-menu-btn');
 const sidebarToggleBtn = document.querySelector('.menu-btn.sidebar-toggle');
-let sidebarVisible = true;
+
+// Initialize sidebar state based on screen width
+const isMobile = window.innerWidth < 768;
+let sidebarVisible = !isMobile;
+
+// Apply initial state
+if (!sidebarVisible) {
+    sidebar.style.display = 'none';
+    mainToggleBtn.style.display = 'block';
+} else {
+    sidebar.style.display = 'flex';
+    mainToggleBtn.style.display = 'none';
+}
 
 function toggleSidebar() {
     sidebarVisible = !sidebarVisible;
