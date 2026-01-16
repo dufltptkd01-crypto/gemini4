@@ -81,11 +81,20 @@ async function fetchGroqResponse(userMessage) {
     // Add user message to history
     conversationHistory.push({ role: "user", content: userMessage });
 
+    // Use saved key if available, otherwise default
+    const savedKey = localStorage.getItem('groq_api_key');
+    const finalApiKey = savedKey || GROQ_API_KEY;
+
+    // Warning if still using placeholder
+    if (finalApiKey.includes("YOUR_GROQ_API_KEY")) {
+        throw new Error("No API Key found. Please set your Key in Settings.");
+    }
+
     try {
         const response = await fetch(GROQ_API_URL, {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${GROQ_API_KEY}`,
+                "Authorization": `Bearer ${finalApiKey}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
@@ -201,4 +210,108 @@ function toggleSidebar() {
 
 mainToggleBtn.addEventListener('click', toggleSidebar);
 sidebarToggleBtn.addEventListener('click', toggleSidebar);
+
+
+// --- NEW FEATURES: Settings, Help, Activity ---
+
+// 1. Settings Modal Logic
+const settingsModal = document.getElementById('settings-modal');
+const btnSettings = document.getElementById('btn-settings');
+const btnCloseModal = document.getElementById('close-modal');
+const btnSaveSettings = document.getElementById('save-settings');
+const inputApiKey = document.getElementById('api-key-input');
+const selectLang = document.getElementById('lang-select');
+
+// Open Settings
+btnSettings.addEventListener('click', () => {
+    // Load current values
+    inputApiKey.value = localStorage.getItem('groq_api_key') || '';
+    selectLang.value = localStorage.getItem('system_lang_pref') || 'auto';
+    settingsModal.style.display = 'flex';
+});
+
+// Close Settings
+const closeModal = () => {
+    settingsModal.style.display = 'none';
+};
+btnCloseModal.addEventListener('click', closeModal);
+// Close if clicking outside
+settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) closeModal();
+});
+
+// Save Settings
+btnSaveSettings.addEventListener('click', () => {
+    const newKey = inputApiKey.value.trim();
+    const newLang = selectLang.value;
+
+    if (newKey) {
+        localStorage.setItem('groq_api_key', newKey);
+        // Update live variable (remove "const" from top if strictly needed, but here we can just assume reload or re-assign if let)
+        // Since GROQ_API_KEY is const, we'll reload the page to apply cleanly or alert appropriately.
+        // Actually, let's just alert for now.
+    }
+
+    localStorage.setItem('system_lang_pref', newLang);
+
+    // Update System Prompt based on Lang
+    updateSystemPrompt(newLang);
+
+    alert('Settings saved! Reloading to apply changes...');
+    location.reload();
+});
+
+
+// 2. Help Button
+document.getElementById('btn-help').addEventListener('click', () => {
+    const helpText = `
+    **Gemini 4 Help**
+    - **Chat**: Type in the box below to start.
+    - **Settings**: Click the gear icon to set your API Key.
+    - **Privacy**: Your API Key is stored only in your browser (LocalStorage).
+    - **Models**: Currently using 'llama-3.1-8b-instant'.
+    `;
+    // Add as a system message
+    const msg = createMessageElement(helpText, 'model');
+    msg.content.innerHTML = formatResponse(helpText);
+    messagesArea.appendChild(msg.row);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    if (window.innerWidth < 768) toggleSidebar(); // Close sidebar on mobile
+});
+
+// 3. Activity Button
+document.getElementById('btn-activity').addEventListener('click', () => {
+    alert('Activity History feature is coming soon!');
+});
+
+// Helper to update system prompt dynamically
+function updateSystemPrompt(langPref) {
+    let prompt = "";
+    if (langPref === 'ko') {
+        prompt = "You are a helpful AI assistant. [STRICT RULE] You MUST respond in KOREAN (Hangul) ONLY. No English, no Hanja.";
+    } else if (langPref === 'en') {
+        prompt = "You are a helpful AI assistant. [STRICT RULE] You MUST respond in ENGLISH ONLY.";
+    } else {
+        // Auto
+        prompt = "You are a helpful AI assistant. [STRICT RULE] Reply in the EXACT SAME language as the user. If Korean, use pure Hangul.";
+    }
+    conversationHistory[0].content = prompt;
+}
+
+// Initialize Logic
+window.addEventListener('load', () => {
+    // Load API Key
+    const savedKey = localStorage.getItem('groq_api_key');
+    if (savedKey) {
+        // We need to override the const. 
+        // Note: You cannot reassign const. 
+        // FIX: We will handle this by checking localStorage directly inside the fetch function instead of relying on the global const.
+    }
+
+    // Load Lang
+    const savedLang = localStorage.getItem('system_lang_pref');
+    if (savedLang) updateSystemPrompt(savedLang);
+});
+
 
