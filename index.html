@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Gemini 4 - The next generation of AI" />
+    <title>Gemini 4</title>
+    <!-- Google Fonts: Outfit for a modern, tech feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Persistent Toggle Button (Visible when sidebar is closed) -->
+        <button id="main-menu-btn" class="menu-btn main-toggle" aria-label="Menu"
+            style="display: none; position: absolute; top: 1rem; left: 1rem; z-index: 100;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <button class="menu-btn sidebar-toggle" aria-label="Menu">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg>
+                </button>
+                <button class="new-chat-btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                    </svg>
+                    <span>New chat</span>
+                </button>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="history-label">Recent</div>
+                <div class="history-item">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 14v-2.47l6.88-6.15c.2-.18.49-.18.69 0L20.47 11.53c.12.11.12.3 0 .41l-1.47 1.32c-.12.11-.3.11-.41 0L13.59 9.3l-5.88 5.25c-.12.11-.29.11-.41 0L6 13.25V14z" />
+                    </svg>
+                    <span class="text-truncate">Project Alpha Planning</span>
+                </div>
+                <div class="history-item active">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 14v-2.47l6.88-6.15c.2-.18.49-.18.69 0L20.47 11.53c.12.11.12.3 0 .41l-1.47 1.32c-.12.11-.3.11-.41 0L13.59 9.3l-5.88 5.25c-.12.11-.29.11-.41 0L6 13.25V14z" />
+                    </svg>
+                    <span class="text-truncate">React Code Refactor</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="footer-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+                    </svg> Help</button>
+                <button class="footer-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z" />
+                    </svg> Activity</button>
+                <button class="footer-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.04.64.09.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z" />
+                    </svg> Settings</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <span class="model-name">Gemini <span class="badge">Pro</span></span>
+                <div class="user-avatar">U</div>
+            </header>
+
+            <div id="chat-container" class="chat-container">
+                <!-- Intro State (visible when empty) -->
+                <div class="intro-view fade-in">
+                    <div class="greeting">
+                        <span class="gradient-text">Hello, User</span>
+                        <p>How can I help you today?</p>
+                    </div>
+                    <div class="suggestion-cards">
+                        <div class="card">
+                            <p>Give me ideas</p>
+                            <span>for a dystopian novel</span>
+                            <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                                </svg></div>
+                        </div>
+                        <div class="card">
+                            <p>Help me write</p>
+                            <span>an SQL query</span>
+                            <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6" />
+                                    <polyline points="8 6 2 12 8 18" />
+                                </svg></div>
+                        </div>
+                        <div class="card">
+                            <p>Brainstorm</p>
+                            <span>marketing taglines</span>
+                            <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" y1="16" x2="12" y2="12" />
+                                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                                </svg></div>
+                        </div>
+                        <div class="card">
+                            <p>Explain</p>
+                            <span>quantum computing</span>
+                            <div class="icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages will be injected here -->
+                <div id="messages-area" class="messages-area"></div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <button class="attach-btn" title="Upload Image">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                        </svg>
+                    </button>
+                    <input type="text" id="user-input" placeholder="Enter a prompt here" autocomplete="off">
+                    <button class="mic-btn" title="Use Microphone">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z" />
+                            <path
+                                d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z" />
+                        </svg>
+                    </button>
+                    <button id="send-btn" class="send-btn" title="Send">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="disclaimer">Gemini may display inaccurate info, including about people, so double-check its
+                    responses.</p>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
