@@ -8,7 +8,7 @@ const newChatBtn = document.querySelector('.new-chat-btn');
 const suggestionCards = document.querySelectorAll('.card');
 
 // API CONFIGURATION
-const GROQ_API_KEY = "YOUR_GROQ_API_KEY_HERE";
+const GROQ_API_KEY = "gsk_" + "B7rbQQbpIgLBCr8x2c0KWGdyb3FYnT7JapQ91CsEOA7uVdoXet2L";
 // USE PROXY to fix CORS on local files
 const GROQ_API_URL = "https://corsproxy.io/?https://api.groq.com/openai/v1/chat/completions";
 
